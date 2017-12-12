@@ -16,6 +16,7 @@ import { IonicPage } from 'ionic-angular';
 export class CalculatorPage {
   height: number;
   weight: number;
+  method: string;
   bmiValue: number;
   bmiMessage: string;
 
@@ -24,8 +25,13 @@ export class CalculatorPage {
 
   calculateBMI() {
     if (this.weight > 0 && this.height > 0) {
-      let finalBmi = this.weight / (this.height / 100 * this.height / 100);
-      this.bmiValue = parseFloat(finalBmi.toFixed(2));
+      if (this.method == 'metric') {
+          let finalBmi = this.weight / (this.height / 100 * this.height / 100);
+          this.bmiValue = parseFloat(finalBmi.toFixed(2));
+      } else {
+          let finalBmiImp = (this.weight * 703) / (this.height * this.height);
+          this.bmiValue = parseFloat(finalBmiImp.toFixed(2));
+      }
       this.setBMIMessage();
     }
   }
